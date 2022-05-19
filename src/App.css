@@ -7,6 +7,13 @@
   pointer-events: none;
 }
 
+.Card {
+  width: 70%;
+  height: 100px;
+  background-color: cadetblue;
+  margin: auto;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -22,10 +29,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
