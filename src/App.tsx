@@ -11,14 +11,12 @@ const App = () => {
   }
 
   const test = useQuery('test', fetchData)
-  if (test.error) return <div>error</div>
-  if (test.isLoading) return <div style={{ textAlign: 'center' }}>loading</div>
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Rq data={test.data} />
+        <Rq data={test} />
       </header>
     </div>
   )

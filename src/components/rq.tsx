@@ -1,11 +1,11 @@
 import React from 'react'
+import { UseQueryResult } from 'react-query'
 
-interface param {
-  data: any
+interface test {
+  data: UseQueryResult<any, any>
 }
-
-const Rq = ({ data }: param) => {
-  const x = data.data.average_transaction_fee_24h
+const Rq = ({ data }: test) => {
+  const x = data
   return (
     <div
       style={{
@@ -15,7 +15,9 @@ const Rq = ({ data }: param) => {
         color: 'black',
       }}
     >
-      {x}
+      {x.isLoading && 'is loading'}
+      {x.error && x.error.message}
+      {x.data && x.data.data.average_transaction_fee_24h}
     </div>
   )
 }
