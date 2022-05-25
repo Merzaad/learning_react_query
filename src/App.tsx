@@ -1,35 +1,28 @@
 import * as React from 'react'
-import logo from './logo.svg'
-import './App.css'
 import { useQuery } from 'react-query'
 import CoinCard from './components/card'
 
 const App = () => {
-  const [coin, setCoin] = React.useState('dogecoin')
   const fetchData = async (coin: string) => {
     const response = await fetch(`https://api.blockchair.com/${coin}/stats`)
-    return response.json()
+    if (response.status === 200) return response.json()
+    return new Promise((resolve) => resolve({ data: { transactions: 'status !== 200' } }))
   }
-  const test = useQuery(['coin', coin], () => fetchData(coin))
-  const switchCoinHandler = () => {
-    if (coin === 'bitcoin') setCoin('dogecoin')
-    if (coin === 'dogecoin') setCoin('bitcoin')
-  }
+
+  const coins = ['bitcoin', 'dogecoin', 'ethereum']
+  const cards = coins.map((coin) => {
+    const query = useQuery(['coin', coin], () => fetchData(coin))
+    return <CoinCard coinResponse={query} key={coin} coin={coin} />
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <button
-          style={{
-            padding: 20,
-            fontSize: 20,
-          }}
-          onClick={switchCoinHandler}
-        >
-          Switch
-        </button>
-        <CoinCard coinResponse={test} coin={coin} />
-      </header>
+    <div
+      style={{
+        padding: 10,
+        minHeight: '100vh',
+        background: 'black',
+      }}
+    >
+      {cards}
     </div>
   )
 }
