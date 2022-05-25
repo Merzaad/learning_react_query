@@ -2,7 +2,7 @@ import * as React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { useQuery } from 'react-query'
-import Rq from './components/rq'
+import CoinCard from './components/card'
 
 const App = () => {
   const [coin, setCoin] = React.useState('dogecoin')
@@ -15,16 +15,20 @@ const App = () => {
     if (coin === 'bitcoin') setCoin('dogecoin')
     if (coin === 'dogecoin') setCoin('bitcoin')
   }
-  const buttonTxt = coin === 'bitcoin' ? 'dogecoin' : 'bitcoin'
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <button style={{
-          padding: 20,
-          fontSize: 20,
-        }} onClick={switchCoinHandler}>{buttonTxt}</button>
-        <Rq data={test} />
+        <button
+          style={{
+            padding: 20,
+            fontSize: 20,
+          }}
+          onClick={switchCoinHandler}
+        >
+          Switch
+        </button>
+        <CoinCard coinResponse={test} coin={coin} />
       </header>
     </div>
   )
