@@ -14,8 +14,8 @@ const App = () => {
     const query = useQuery(['coin', coin], () => fetchData(coin))
     return <CoinCard coinResponse={query} key={coin} coin={coin} />
   })
-  const submit = () => {
-    alert('submited')
+  const submit = (otp) => {
+    alert(otp)
   }
   React.useEffect(() => {
     if ('OTPCredential' in window) {
