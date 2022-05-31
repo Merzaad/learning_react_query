@@ -19,18 +19,29 @@ const App = () => {
   }
   React.useEffect(() => {
     if ('OTPCredential' in window) {
-      const ac = new AbortController()
-      navigator.credentials
-        .get({
-          otp: { transport: ['sms'] },
-          signal: ac.signal,
-        })
-        .then((otp) => {
-          submit(otp.code)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      window.addEventListener('DOMContentLoaded', (e) => {
+        const input = document.querySelector('input[autocomplete="one-time-code"]')
+        if (!input) return
+        const ac = new AbortController()
+        const form = input.closest('form')
+        if (form) {
+          form.addEventListener('submit', (e) => {
+            ac.abort()
+          })
+        }
+        navigator.credentials
+          .get({
+            otp: { transport: ['sms'] },
+            signal: ac.signal,
+          })
+          .then((otp) => {
+            input.value = otp.code
+            if (form) submit(otp.code)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      })
     }
   })
   return (
@@ -43,10 +54,8 @@ const App = () => {
     >
       {cards}
       <form>
-        <input />
-        <button onClick={submit} >
-          submit
-        </button>
+        <input autoComplete="one-time-code" />
+        <button onClick={submit}>submit</button>
       </form>
     </div>
   )
