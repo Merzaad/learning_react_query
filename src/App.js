@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import CoinCard from './components/card'
 
 const App = () => {
-  const fetchData = async (coin) => {
+  const fetchData = async (coin: string) => {
     const response = await fetch(`https://api.blockchair.com/${coin}/stats`)
     if (response.status === 200) return response.json()
     return new Promise((resolve) => resolve({ data: { transactions: 'status !== 200' } }))
@@ -14,7 +14,7 @@ const App = () => {
     const query = useQuery(['coin', coin], () => fetchData(coin))
     return <CoinCard coinResponse={query} key={coin} coin={coin} />
   })
-  const submit = (otp) => {
+  const submit = (otp: 'string') => {
     alert(otp)
   }
   React.useEffect(() => {
@@ -35,8 +35,8 @@ const App = () => {
             signal: ac.signal,
           })
           .then((otp) => {
-            input.value = otp.code
-            if (form) submit(otp.code)
+            if (otp) input.value = otp.code
+            if (form && otp) submit(otp.code)
           })
           .catch((err) => {
             console.log(err)
@@ -55,7 +55,7 @@ const App = () => {
       {cards}
       <form>
         <input autoComplete="one-time-code" />
-        <button onClick={submit}>submit</button>
+        <button onClick={submit()}>submit</button>
       </form>
     </div>
   )
