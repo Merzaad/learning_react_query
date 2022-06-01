@@ -17,7 +17,7 @@ const App = () => {
   const submit = (otp) => {
     alert(otp)
   }
-  const test = 'testasdasdasdasdasdasdasdase'
+  const test = 'test rebase'
   React.useEffect(() => {
     if ('OTPCredential' in window) {
       window.addEventListener('DOMContentLoaded', (e) => {
