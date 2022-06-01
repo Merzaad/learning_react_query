@@ -3,7 +3,7 @@ import { useQuery } from 'react-query'
 import CoinCard from './components/card'
 
 const App = () => {
-  const fetchData = async (coin: string) => {
+  const fetchData = async (coin) => {
     const response = await fetch(`https://api.blockchair.com/${coin}/stats`)
     if (response.status === 200) return response.json()
     return new Promise((resolve) => resolve({ data: { transactions: 'status !== 200' } }))
@@ -14,10 +14,10 @@ const App = () => {
     const query = useQuery(['coin', coin], () => fetchData(coin))
     return <CoinCard coinResponse={query} key={coin} coin={coin} />
   })
-  const submit = (otp: 'string') => {
+  const submit = (otp) => {
     alert(otp)
   }
-  const test = 'testtttttt rebase'
+  const test = 'testttttttttttt rebase'
   React.useEffect(() => {
     if ('OTPCredential' in window) {
       window.addEventListener('DOMContentLoaded', (e) => {
