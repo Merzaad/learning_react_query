@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
-export default function useFakeQuery(initial: number) {
-  const [state, setState] = useState(() => initial)
+export default function useFakeQuery(id: number) {
+  const [state, setState] = useState(0)
   const queryFn = async () => {
     const promise = () => {
       return new Promise<number>((resolve) => {
@@ -15,5 +15,5 @@ export default function useFakeQuery(initial: number) {
     setState(data)
     return data
   }
-  return { useQuery: useQuery({ queryKey: ['fakeQuery'], queryFn }), state }
+  return { useQuery: useQuery({ queryKey: ['fakeQuery', id], queryFn }), state }
 }

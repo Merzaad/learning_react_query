@@ -7,7 +7,7 @@ export default function Button({
 }) {
   return (
     <button
-      className='rounded-md bg-zinc-900 p-2 hover:bg-teal-900 active:scale-95'
+      className='rounded-md bg-zinc-800 p-1 hover:bg-teal-800 active:scale-95'
       onClick={onClick}
     >
       {children}
